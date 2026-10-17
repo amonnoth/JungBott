@@ -148,28 +148,6 @@
   }
   .sol-body b { color: var(--text); }
 
-  /* Werkzeug (Binär-Übersetzer) */
-  .tool {
-    background: #0c0f12; border: 1px solid var(--line); border-radius: 12px;
-    padding: 14px 16px; margin: 0 0 20px; text-align: left;
-  }
-  .tool-label {
-    display: block; margin-bottom: 10px;
-    font: 600 11px/1 ui-monospace, Menlo, Consolas, monospace;
-    letter-spacing: .2em; text-transform: uppercase; color: var(--accent);
-  }
-  .tool input {
-    font-size: 16px; letter-spacing: .18em; text-indent: .18em; padding: 11px 12px;
-    text-transform: none;
-  }
-  .tool-out {
-    margin-top: 10px; font-size: 14px; color: var(--muted);
-    display: flex; align-items: center; gap: 8px; justify-content: space-between;
-  }
-  .tool-out b {
-    font: 700 20px/1 ui-monospace, Menlo, Consolas, monospace;
-    color: var(--ok); letter-spacing: .12em; word-break: break-all;
-  }
   .hint {
     margin-top: 18px; text-align: left;
     background: #0c0f12; border: 1px dashed #3b4a42; border-radius: 10px;
@@ -213,12 +191,12 @@ window.addEventListener("error", e => {
 /* ============================================================
    KONFIGURATION – Aufgaben, Lösungen und Schlusscode
    ============================================================ */
-const INTRO = "Bern, im Jahr 2040. Die Burgergemeinde hat eine eigene KI entwickelt – doch ihr Aktivierungscode wurde aus Sicherheitsgründen in <b>vier Fragmente</b> aufgeteilt und auf diesem PC versteckt.<br><br>Deine Mission: Finde alle vier Fragmente, trag sie hier ein und setze daraus den Aktivierungscode zusammen. Bei jeder Aufgabe kannst du dir mit dem Lösungs-Knopf helfen lassen.";
+const INTRO = "Bern, im Jahr 2040. Die KI der Burgergemeinde Bern gehört längst zum Arbeitsalltag – und heute hat sie eine Aufgabe für dich: Auf diesem PC hat sie <b>vier Fragmente</b> eines Zugangscodes versteckt.<br><br>Deine Mission: Finde alle vier Fragmente, trag sie hier ein und setze daraus den Zugangscode zusammen. Bei jeder Aufgabe kannst du dir mit dem Lösungs-Knopf helfen lassen.";
 
 const STEPS = [
-  { tool: "binary", title: "Maschinensprache",
-    hint: "Auf dem PC liegt die Datei <strong>KI_Nachricht.txt</strong>. Öffne sie – darin steht eine Folge aus Nullen und Einsen.<br>Computer speichern jedes Zeichen als solche Bitfolge. Übersetze sie mit dem Übersetzer unten zurück – das Ergebnis ist dein erstes Fragment.",
-    a: "QQ==", sol: "PGI+TMO2c3VuZzogQTwvYj48YnI+SW4gPGI+S0lfTmFjaHJpY2h0LnR4dDwvYj4gc3RlaHQgPGI+MDEwMDAwMDE8L2I+LiBEYXMgaXN0IGRpZSBCaW7DpHJ6YWhsIDY1LCB1bmQgaW0gQVNDSUktQ29kZSwgbWl0IGRlbSBDb21wdXRlciBUZXh0IHNwZWljaGVybiwgc3RlaHQgZGllIDY1IGbDvHIgZGVuIEJ1Y2hzdGFiZW4gPGI+QTwvYj4uIEVpbmZhY2ggZGllIEJpdGZvbGdlIGluIGRlbiDDnGJlcnNldHplciBvYmVuIGtvcGllcmVuLg==" },
+  { title: "Maschinensprache",
+    hint: "Die KI hat dir eine Nachricht hinterlassen: die Datei <strong>KI_Nachricht.txt</strong>. Öffne sie – darin steht eine Folge aus Nullen und Einsen.<br>Computer speichern jedes Zeichen als solche Bitfolge. Übersetze sie zurück – das Ergebnis ist dein erstes Fragment.",
+    a: "QQ==", sol: "PGI+TMO2c3VuZzogQTwvYj48YnI+SW4gPGI+S0lfTmFjaHJpY2h0LnR4dDwvYj4gc3RlaHQgPGI+MDEwMDAwMDE8L2I+LiBEYXMgaXN0IGRpZSBCaW7DpHJ6YWhsIDY1LCB1bmQgaW0gQVNDSUktQ29kZSwgbWl0IGRlbSBDb21wdXRlciBUZXh0IHNwZWljaGVybiwgc3RlaHQgZGllIDY1IGbDvHIgZGVuIEJ1Y2hzdGFiZW4gPGI+QTwvYj4uIEFtIHNjaG5lbGxzdGVuIGdlaHQgZXMsIHdlbm4gZHUgZGllIEJpdGZvbGdlIGRlciBLSSBkZXIgQnVyZ2VyZ2VtZWluZGUgenVtIMOcYmVyc2V0emVuIGdpYnN0Lg==" },
   { title: "Projekte_2040",
     hint: "Im Ordner <strong>Projekte_2040</strong> liegen viele Dateien – aber nur die <strong>zuletzt geänderte</strong> enthält ein Fragment.<br>Finde heraus, welche Datei als letzte bearbeitet wurde.",
     a: "RA==", sol: "PGI+TMO2c3VuZzogRDwvYj48YnI+SW0gRXhwbG9yZXIgb2JlbiBhdWYgZGllIFNwYWx0ZSA8Yj7DhG5kZXJ1bmdzZGF0dW08L2I+IGtsaWNrZW4sIGRhbWl0IGRpZSBEYXRlaWVuIGRhbmFjaCBzb3J0aWVydCB3ZXJkZW4gKGZlaGx0IGRpZSBTcGFsdGU6IEFuc2ljaHQgYXVmIMKrRGV0YWlsc8K7IHN0ZWxsZW4pLiBEaWUgenVsZXR6dCBnZcOkbmRlcnRlIERhdGVpIGlzdCA8Yj5Qcm9qZWt0XzExPC9iPiDigJMgZGFyaW4gc3RlaHQgZGFzIEZyYWdtZW50IDxiPkQ8L2I+Lg==" },
@@ -296,12 +274,6 @@ function renderTask(i) {
     <p class="kicker">Fragment ${i + 1} von ${STEPS.length}</p>
     <h1>${s.title}</h1>
     <p class="lead">${s.hint}</p>
-    ${s.tool === "binary" ? `
-    <div class="tool">
-      <span class="tool-label">Binär-Übersetzer</span>
-      <input id="bin" maxlength="80" placeholder="Bitfolge einfügen" spellcheck="false">
-      <div class="tool-out"><span>Ergebnis</span><b id="binout">–</b></div>
-    </div>` : ""}
     <label for="frag" class="kicker" style="position:absolute;left:-9999px">Gefundenes Zeichen</label>
     <input id="frag" class="one" maxlength="1" placeholder="?" autocapitalize="characters"
            spellcheck="false" value="${esc(state.answers[i])}">
@@ -322,19 +294,6 @@ function renderTask(i) {
     msg.textContent = "";
   });
   input.addEventListener("keydown", e => { if (e.key === "Enter") document.getElementById("next").click(); });
-
-  const bin = document.getElementById("bin");
-  if (bin) {
-    const out = document.getElementById("binout");
-    bin.addEventListener("input", () => {
-      bin.value = bin.value.replace(/[^01 ]/g, "");
-      const bits = bin.value.replace(/\s+/g, "");
-      if (!bits) { out.textContent = "–"; return; }
-      if (bits.length % 8 !== 0) { out.textContent = "… " + (8 - bits.length % 8) + " Bit fehlen"; return; }
-      out.textContent = (bits.match(/.{8}/g) || [])
-        .map(byte => String.fromCharCode(parseInt(byte, 2))).join("");
-    });
-  }
 
   if (i > 0) document.getElementById("back").onclick = () => { state.step = i - 1; save(); render(); };
 
@@ -364,7 +323,7 @@ function renderFinal() {
     <div class="dial" aria-hidden="true"></div>
     <p class="kicker">Letzter Schritt</p>
     <h1>Der Tresor</h1>
-    <p class="lead">Alle vier Fragmente sind gefunden. Setz sie zum Aktivierungscode zusammen und gib ihn ein.</p>
+    <p class="lead">Alle vier Fragmente sind gefunden. Setz sie zum Zugangscode zusammen und gib ihn ein.</p>
     <input id="code" maxlength="4" placeholder="&bull; &bull; &bull; &bull;" autocapitalize="characters" spellcheck="false">
     <div class="row">
       <button class="ghost" id="back" type="button">Zur&uuml;ck</button>
